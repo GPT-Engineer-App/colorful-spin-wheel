@@ -24,7 +24,15 @@ const Index = () => {
   );
 
   // Shuffle the array to have a randomized wheel slice order
-  const shuffledWheelSlices = wheelSlices.sort(() => Math.random() - 0.5);
+  const shuffledWheelSlices = wheelSlices.reduce((result, slice) => {
+    if (result.length === 0 || result[result.length - 1].color !== slice.color) {
+      result.push(slice);
+    } else {
+      const insertIndex = result.findIndex((s, i) => i > 0 && result[i - 1].color !== slice.color && s.color !== slice.color);
+      result.splice(insertIndex === -1 ? result.length : insertIndex, 0, slice);
+    }
+    return result;
+  }, []);
 
   return (
     <Flex maxW="container.xl" justify="space-between" p="4" bg="white" boxShadow="0 4px 20px rgba(0, 0, 0, 0.2)" borderRadius="lg">
@@ -32,12 +40,12 @@ const Index = () => {
         <DenominationList />
       </Box>
       <Box flex="1" padding="4" position="relative" boxShadow="0 4px 20px rgba(0, 0, 0, 0.1)" borderRadius="lg" bg="white" margin="2">
-        <Box position="absolute" top="0" left="50%" transform="translateX(-50%) translateY(-30px)" width="0" height="0" borderLeft="20px solid transparent" borderRight="20px solid transparent" borderTop="40px solid black" zIndex="2" />
+        <Box position="absolute" top="0" left="50%" transform="translateX(-50%) translateY(-30px)" width="0" height="0" borderLeft="15px solid transparent" borderRight="15px solid transparent" borderTop="30px solid black" zIndex="2" />
         <Center height="100%">
           <Box position="relative" height="300px" width="300px" boxShadow="0 8px 24px rgba(0, 0, 0, 0.6)">
             <svg viewBox="0 0 100 100" width="300px" height="300px" style={{ transform: `rotate(${rotation}deg)`, transition: "transform 3s ease-out" }}>
               {wheelSlices.map((slice, index) => (
-                <path key={index} fill={slice.color} d={`M50,50 L${50 + 50 * Math.cos((Math.PI * 2 * index) / wheelSlices.length)},${50 + 50 * Math.sin((Math.PI * 2 * index) / wheelSlices.length)} A50,50 0 0,1 ${50 + 50 * Math.cos((Math.PI * 2 * (index + 1)) / wheelSlices.length)},${50 + 50 * Math.sin((Math.PI * 2 * (index + 1)) / wheelSlices.length)} Z`} />
+                <path key={index} fill={slice.color} stroke="#fff" strokeWidth="0.5" d={`M50,50 L${50 + 50 * Math.cos((Math.PI * 2 * index) / totalSlices)},${50 + 50 * Math.sin((Math.PI * 2 * index) / totalSlices)} A50,50 0 0,1 ${50 + 50 * Math.cos((Math.PI * 2 * (index + 1)) / totalSlices)},${50 + 50 * Math.sin((Math.PI * 2 * (index + 1)) / totalSlices)} Z`} />
               ))}
             </svg>
           </Box>
