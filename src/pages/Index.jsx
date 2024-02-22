@@ -24,7 +24,42 @@ const Index = () => {
   );
 
   // Arrange the wheel slice colors based on the colors in Column A without having the same color next to each other
-  const arrangedSlices = []; // Temporary fix: Initialize arrangedSlices as an empty array to prevent the reference error
+  const shuffleArray = (array) => {
+    let currentIndex = array.length,
+      randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex !== 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+  };
+
+  const arrangeSlices = (slices) => {
+    let arranged = [shuffleArray(slices).pop()]; // Start with a random slice
+
+    while (slices.length > 0) {
+      for (let i = 0; i < slices.length; i++) {
+        if (slices[i].color !== arranged[arranged.length - 1].color) {
+          arranged.push(slices.splice(i, 1)[0]);
+          break;
+        }
+      }
+
+      // Shuffle the remaining slices to try a different order if no different color is found
+      shuffleArray(slices);
+    }
+
+    return arranged;
+  };
+
+  const arrangedSlices = arrangeSlices([...wheelSlices]);
 
   return (
     <Flex maxW="container.xl" justify="space-between" p="4" bg="white" boxShadow="0 4px 20px rgba(0, 0, 0, 0.2)" borderRadius="lg">
