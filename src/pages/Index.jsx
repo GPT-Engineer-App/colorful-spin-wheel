@@ -23,16 +23,32 @@ const Index = () => {
     })),
   );
 
-  // Shuffle the array to have a randomized wheel slice order
-  const shuffledWheelSlices = wheelSlices.reduce((result, slice) => {
-    if (result.length === 0 || result[result.length - 1].color !== slice.color) {
-      result.push(slice);
-    } else {
-      const insertIndex = result.findIndex((s, i) => i > 0 && result[i - 1].color !== slice.color && s.color !== slice.color);
-      result.splice(insertIndex === -1 ? result.length : insertIndex, 0, slice);
+  // Shuffle the array to have a randomized wheel slice order without having the same color next to each other
+  const shuffledWheelSlices = (slices) => {
+    let shuffled = [];
+    while (slices.length > 0) {
+      // Find a suitable slice that does not match the color of the last slice in shuffled array
+      const nextSliceIndex = slices.findIndex((slice, index) => shuffled.length === 0 || slice.color !== shuffled[shuffled.length - 1].color);
+      // If suitable slice is found, move it to shuffled array
+      if (nextSliceIndex !== -1) {
+        shuffled.push(slices.splice(nextSliceIndex, 1)[0]);
+      } else {
+        // If no suitable slice is found, break to prevent infinite loop
+        break;
+      }
     }
-    return result;
-  }, []);
+    // If there are remaining slices, they were not placed because of color conflict, so we need to interleave them
+    while (slices.length > 0) {
+      for (let i = 1; i < shuffled.length; i++) {
+        if (slices.length === 0) break;
+        if (shuffled[i].color !== slices[0].color && shuffled[i - 1].color !== slices[0].color) {
+          shuffled.splice(i, 0, slices.shift());
+        }
+      }
+    }
+    return shuffled;
+  };
+  const shuffledSlices = shuffledWheelSlices(wheelSlices.slice()); // Pass a shallow copy of wheelSlices to the shuffling function
 
   return (
     <Flex maxW="container.xl" justify="space-between" p="4" bg="white" boxShadow="0 4px 20px rgba(0, 0, 0, 0.2)" borderRadius="lg">
