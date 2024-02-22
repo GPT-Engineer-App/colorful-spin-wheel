@@ -26,12 +26,13 @@ const Index = () => {
     <Container centerContent>
       <Box position="relative" height="300px" width="300px" marginTop="50px">
         <svg viewBox="0 0 100 100" width="300px" height="300px" style={{ transform: `rotate(${rotation}deg)`, transition: "transform 3s ease-out" }}>
+          <polygon points="49,3 51,3 50,0" fill="black" />
           {wheelSlices.map((slice, index) => (
             <path key={index} fill={slice.color} d={`M50,50 L${50 + 50 * Math.cos((Math.PI * 2 * index) / wheelSlices.length)},${50 + 50 * Math.sin((Math.PI * 2 * index) / wheelSlices.length)} A50,50 0 0,1 ${50 + 50 * Math.cos((Math.PI * 2 * (index + 1)) / wheelSlices.length)},${50 + 50 * Math.sin((Math.PI * 2 * (index + 1)) / wheelSlices.length)} Z`} />
           ))}
         </svg>
         {wheelSlices.map((slice, index) => (
-          <Text key={index} position="absolute" top="50%" left="50%" style={{ transform: `rotate(${-(rotation % 360) + index * 30}deg) translateX(70px)` }} fontWeight="bold">
+          <Text key={index} position="absolute" top="50%" left="50%" backgroundColor="rgba(0, 0, 0, 0.7)" borderRadius="full" padding="2" color="white" style={{ transform: `rotate(${-(rotation % 360) + index * 30}deg) translateX(70px)` }} fontWeight="bold">
             {slice.value}
           </Text>
         ))}
