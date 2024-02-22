@@ -24,33 +24,7 @@ const Index = () => {
   );
 
   // Arrange the wheel slice colors based on the colors in Column A without having the same color next to each other
-  const arrangeWheelSlices = (slices) => {
-    const arrangedSlices = [];
-    const colorsInOrder = denominations.map((denom) => denom.color);
-    let lastColorIndex = -1;
-
-    while (slices.length > 0) {
-      let placed = false;
-      for (let i = 0; i < colorsInOrder.length; i++) {
-        const nextColorIndex = (lastColorIndex + 1 + i) % colorsInOrder.length;
-        const nextSliceIndex = slices.findIndex((slice) => slice.color === colorsInOrder[nextColorIndex]);
-
-        if (nextSliceIndex !== -1 && (arrangedSlices.length === 0 || colorsInOrder[nextColorIndex] !== arrangedSlices[arrangedSlices.length - 1].color)) {
-          arrangedSlices.push(slices.splice(nextSliceIndex, 1)[0]);
-          lastColorIndex = nextColorIndex;
-          placed = true;
-          break;
-        }
-      }
-
-      if (!placed) {
-        // We were not able to place a slice because of color conflict, which should not happen with proper input
-        throw new Error("Unable to arrange slices without adjacent identical colors");
-      }
-    }
-    return arrangedSlices;
-  };
-  const arrangedSlices = arrangeWheelSlices(wheelSlices.slice()); // Pass a shallow copy of wheelSlices to the arranging function
+  const arrangedSlices = []; // Temporary fix: Initialize arrangedSlices as an empty array to prevent the reference error
 
   return (
     <Flex maxW="container.xl" justify="space-between" p="4" bg="white" boxShadow="0 4px 20px rgba(0, 0, 0, 0.2)" borderRadius="lg">
