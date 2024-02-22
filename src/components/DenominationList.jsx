@@ -24,4 +24,4 @@ const DenominationList = () => {
   );
 };
 
-export default DenominationList;
+export { DenominationList, denominations };
