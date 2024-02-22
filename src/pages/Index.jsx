@@ -32,7 +32,7 @@ const Index = () => {
           ))}
         </svg>
         {wheelSlices.map((slice, index) => (
-          <Text key={index} position="absolute" top="50%" left="50%" backgroundColor="rgba(0, 0, 0, 0.7)" borderRadius="full" padding="2" color="white" style={{ transform: `rotate(${-(rotation % 360) + index * 30}deg) translateX(70px)` }} fontWeight="bold">
+          <Text key={index} position="absolute" top="50%" left="50%" backgroundColor="rgba(0, 0, 0, 0.7)" borderRadius="full" padding="2" color="white" style={{ transform: `translateX(70px)` }} fontWeight="bold">
             {slice.value}
           </Text>
         ))}
