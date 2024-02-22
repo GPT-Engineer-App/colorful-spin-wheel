@@ -16,8 +16,11 @@ const DenominationList = () => {
     <VStack align="start" spacing={4} marginBottom={8}>
       {denominations.map((denomination, index) => (
         <HStack key={index}>
-          <Text fontWeight="bold">{`${denomination.value} x ${denomination.quantity}`}</Text>
-          <Box width="30px" height="30px" bgColor={denomination.color} borderRadius="md" />
+          <Box width="50px" height="30px" bgColor={denomination.color} borderRadius="md">
+            <Box display="flex" alignItems="center" justifyContent="center" height="100%">
+              <Text fontWeight="bold">{denomination.value}</Text>
+            </Box>
+          </Box>
         </HStack>
       ))}
     </VStack>

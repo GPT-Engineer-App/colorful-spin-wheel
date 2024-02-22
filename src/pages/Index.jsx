@@ -32,7 +32,7 @@ const Index = () => {
         <DenominationList />
       </Box>
       <Box flex="1" padding="4" position="relative" boxShadow="0 4px 20px rgba(0, 0, 0, 0.1)" borderRadius="lg" bg="white" margin="2">
-        <Box position="absolute" top="0" left="50%" transform="translateX(-50%) translateY(-10px)" width="0" height="0" borderLeft="20px solid transparent" borderRight="20px solid transparent" borderBottom="40px solid black" zIndex="2" />
+        <Box position="absolute" top="0" left="50%" transform="translateX(-50%) translateY(-30px)" width="0" height="0" borderLeft="20px solid transparent" borderRight="20px solid transparent" borderTop="40px solid black" zIndex="2" />
         <Center height="100%">
           <Box position="relative" height="300px" width="300px" boxShadow="0 8px 24px rgba(0, 0, 0, 0.6)">
             <svg viewBox="0 0 100 100" width="300px" height="300px" style={{ transform: `rotate(${rotation}deg)`, transition: "transform 3s ease-out" }}>
