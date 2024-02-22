@@ -24,14 +24,14 @@ const Index = () => {
   wheelSlices[Math.floor(Math.random() * wheelSlices.length)].value = 500;
 
   return (
-    <Flex maxW="container.xl" justify="space-between">
-      <Box flex="1" padding="4">
+    <Flex maxW="container.xl" justify="space-between" p="4" bg="white" boxShadow="0 4px 20px rgba(0, 0, 0, 0.2)" borderRadius="lg">
+      <Box flex="1" padding="4" boxShadow="0 4px 20px rgba(0, 0, 0, 0.1)" borderRadius="lg" bg="white" margin="2">
         <DenominationList />
       </Box>
-      <Box flex="1" padding="4" position="relative">
-        <Box position="absolute" top="0" left="50%" transform="translateX(-50%)" width="0" height="0" borderLeft="20px solid transparent" borderRight="20px solid transparent" borderBottom="20px solid black" />
+      <Box flex="1" padding="4" position="relative" boxShadow="0 4px 20px rgba(0, 0, 0, 0.1)" borderRadius="lg" bg="white" margin="2">
+        <Box position="absolute" top="0" left="50%" transform="translateX(-50%) translateY(-10px)" width="0" height="0" borderLeft="10px solid transparent" borderRight="10px solid transparent" borderBottom="30px solid black" zIndex="2" />
         <Center height="100%">
-          <Box position="relative" height="300px" width="300px">
+          <Box position="relative" height="300px" width="300px" boxShadow="0 8px 24px rgba(0, 0, 0, 0.6)">
             <svg viewBox="0 0 100 100" width="300px" height="300px" style={{ transform: `rotate(${rotation}deg)`, transition: "transform 3s ease-out" }}>
               {wheelSlices.map((slice, index) => (
                 <path key={index} fill={slice.color} d={`M50,50 L${50 + 50 * Math.cos((Math.PI * 2 * index) / wheelSlices.length)},${50 + 50 * Math.sin((Math.PI * 2 * index) / wheelSlices.length)} A50,50 0 0,1 ${50 + 50 * Math.cos((Math.PI * 2 * (index + 1)) / wheelSlices.length)},${50 + 50 * Math.sin((Math.PI * 2 * (index + 1)) / wheelSlices.length)} Z`} />
