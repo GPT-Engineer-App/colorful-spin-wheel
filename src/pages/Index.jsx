@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Button, Center, Container, Text } from "@chakra-ui/react";
 import { FaRedo } from "react-icons/fa";
+import DenominationList from "../components/DenominationList";
 
 const Index = () => {
   const [rotation, setRotation] = useState(0);
@@ -23,7 +24,8 @@ const Index = () => {
   wheelSlices[Math.floor(Math.random() * wheelSlices.length)].value = 500;
 
   return (
-    <Container centerContent>
+    <Container centerContent maxW="container.xl">
+      <DenominationList />
       <Box position="relative" height="300px" width="300px" marginTop="50px">
         <svg viewBox="0 0 100 100" width="300px" height="300px" style={{ transform: `rotate(${rotation}deg)`, transition: "transform 3s ease-out" }}>
           <polygon points="49,3 51,3 50,0" fill="black" />
