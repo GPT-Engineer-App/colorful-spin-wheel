@@ -2,18 +2,19 @@ import React from "react";
 import { VStack, HStack, Text, Box } from "@chakra-ui/react";
 
 const denominations = [
-  { value: 500, quantity: 1, color: "hsl(360, 100%, 70%)" },
-  { value: 100, quantity: 2, color: "hsl(300, 100%, 70%)" },
-  { value: 50, quantity: 3, color: "hsl(240, 100%, 70%)" },
-  { value: 40, quantity: 4, color: "hsl(180, 100%, 70%)" },
-  { value: 30, quantity: 5, color: "hsl(120, 100%, 70%)" },
-  { value: 20, quantity: 6, color: "hsl(60, 100%, 70%)" },
-  { value: 10, quantity: 7, color: "hsl(0, 100%, 70%)" },
+  { value: "free hair cut", quantity: 2, color: "hsl(360, 100%, 70%)" },
+  { value: "free manicure", quantity: 2, color: "hsl(300, 100%, 70%)" },
+  { value: "free pedicure", quantity: 2, color: "hsl(240, 100%, 70%)" },
+  { value: "voucher worth 100", quantity: 5, color: "hsl(180, 100%, 70%)" },
+  { value: "voucher worth 500", quantity: 1, color: "hsl(120, 100%, 70%)" },
 ];
 
 const DenominationList = () => {
   return (
     <VStack align="start" spacing={4} marginBottom={8}>
+      <Text fontSize="2xl" fontWeight="bold" marginBottom={4}>
+        Legend
+      </Text>
       {denominations.map((denomination, index) => (
         <HStack key={index}>
           <Box width="50px" height="30px" bgColor={denomination.color} borderRadius="md">
