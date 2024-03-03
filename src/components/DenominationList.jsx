@@ -17,11 +17,10 @@ const DenominationList = () => {
       </Text>
       {denominations.map((denomination, index) => (
         <HStack key={index}>
-          <Box width="50px" height="30px" bgColor={denomination.color} borderRadius="md">
-            <Box display="flex" alignItems="center" justifyContent="center" height="100%">
-              <Text fontWeight="bold">{denomination.value}</Text>
-            </Box>
-          </Box>
+          <Box width="50px" height="30px" bgColor={denomination.color} borderRadius="md" />
+          <Text fontWeight="bold" marginLeft={3}>
+            {denomination.value}
+          </Text>
         </HStack>
       ))}
     </VStack>
